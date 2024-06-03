@@ -11,10 +11,6 @@ const (
 	ErrorCodeNotStarted
 )
 
-var readerNotInitializedError = errors.Forbidden().
-	WithCode(ErrorCodeNilReader).
-	WithDesc("reader not initialized")
-
 var isNotEnabledError = errors.Forbidden().
 	WithCode(ErrorCodeNotEnabled).
 	WithDesc("is not enabled")

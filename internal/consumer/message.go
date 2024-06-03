@@ -31,16 +31,14 @@ func (c *c) beginHandleMessage() {
 				err := c.msgHandlerFunc(_msg)
 				if err != nil {
 					if c.config.Debug {
-						if err != nil {
-							c.logger.
-								With(logger.Field{
-									"partition": _msg.GetKafkaMessage().Partition,
-									"offset":    _msg.GetKafkaMessage().Offset,
-									"error":     err,
-								}).
-								WithTrace("beginHandleMessage.call.after.error").
-								Errorf("handled message from queue")
-						}
+						c.logger.
+							With(logger.Field{
+								"partition": _msg.GetKafkaMessage().Partition,
+								"offset":    _msg.GetKafkaMessage().Offset,
+								"error":     err,
+							}).
+							WithTrace("beginHandleMessage.call.after.error").
+							Errorf("handled message from queue")
 					}
 					continue
 				}
