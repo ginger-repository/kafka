@@ -27,7 +27,7 @@ func (c *c) beginHandleMessage() {
 					WithTrace("beginHandleMessage.call.before").
 					Debugf("handing message from queue")
 			}
-			for {
+			for retries := c.config.RetryThreshold; retries > 0; retries-- {
 				err := c.msgHandlerFunc(_msg)
 				if err != nil {
 					if c.config.Debug {

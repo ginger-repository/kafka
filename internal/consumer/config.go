@@ -99,6 +99,7 @@ type config struct {
 	Delay           time.Duration
 	CheckDelay      time.Duration
 	ConcurrentCount int
+	RetryThreshold  int
 	Handler         *handlerConfig
 }
 
@@ -122,6 +123,9 @@ func (c *config) initialize() {
 	}
 	if c.Handler == nil {
 		c.Handler = new(handlerConfig)
+	}
+	if c.RetryThreshold == 0 {
+		c.RetryThreshold = 3
 	}
 	c.Handler.properties = c.Properties
 	c.Handler.initialize()
