@@ -22,7 +22,7 @@ func (p *p) Produce(ctx context.Context, msg message.Message) errors.Error {
 		Topic: p.config.Topic,
 		Value: sarama.ByteEncoder(msg.GetValue()),
 	}
-	if topic := msg.GetTopic(); topic != nil {
+	if topic := msg.GetTopic(); topic != nil && topic.GetName() != "" {
 		input.Topic = topic.GetName()
 	}
 	if key := msg.GetKey(); key != nil {
